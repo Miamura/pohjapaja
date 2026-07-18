@@ -134,7 +134,29 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Staattinen hero-runko: maalautuu heti ennen Reactin käynnistymistä
+         (FCP/LCP), React korvaa sen identtisen näköisellä interaktiivisella
+         versiolla. Pidettävä synkassa Hero.tsx:n ja copy.ts:n (fi) kanssa. -->
+    <div id="root">
+      <section class="hero dotgrid">
+        <div class="hero__content">
+          <p class="tag tag--dark">CNC-verstas · Helsinki</p>
+          <h1 class="hero__title">
+            <span class="hero__line-wrap"><span class="hero__line">Digitaalisesta ideasta</span></span>
+            <span class="hero__line-wrap"><span class="hero__line">tarkaksi esineeksi.</span></span>
+          </h1>
+          <div class="hero__tagline">
+            <span class="hero__rule"></span>
+            <span>Pohjatyöstä viimeistelyyn.</span>
+          </div>
+          <div class="hero__actions">
+            <button class="btn btn--brass" type="button">Pyydä tarjous</button>
+            <button class="btn btn--outline-light" type="button">Katso tuotteet</button>
+          </div>
+          <p class="hero__note">Tilauksesta valmistettu · Toimitusaika ilmoitetaan tarjouksessa.</p>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

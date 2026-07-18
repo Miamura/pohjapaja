@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { Corners } from './icons'
 import type { Lang } from '../copy'
@@ -24,6 +24,18 @@ export default function Hero({ lang, reducedMotion, onPrimary, onSecondary }: He
   const section = useRef<HTMLElement>(null)
   const coordX = useRef<HTMLSpanElement>(null)
   const coordY = useRef<HTMLSpanElement>(null)
+  const [sceneReady, setSceneReady] = useState(false)
+
+  // three.js-haku ja canvasin pystytys vasta kun pääsäie on jouten, jotta
+  // koriste-sahne ei kilpaile ensimmäisen maalauksen kanssa.
+  useEffect(() => {
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(() => setSceneReady(true), { timeout: 2500 })
+      return () => window.cancelIdleCallback(id)
+    }
+    const t = window.setTimeout(() => setSceneReady(true), 1500)
+    return () => window.clearTimeout(t)
+  }, [])
 
   // Koordinaatit "liikkuvat" scrollin mukana — kirjoitetaan suoraan DOM:iin
   useEffect(() => {
@@ -55,9 +67,11 @@ export default function Hero({ lang, reducedMotion, onPrimary, onSecondary }: He
   return (
     <section ref={section} className="hero dotgrid">
       <Corners />
-      <Suspense fallback={null}>
-        <ToolpathScene reducedMotion={reducedMotion} />
-      </Suspense>
+      {sceneReady && (
+        <Suspense fallback={null}>
+          <ToolpathScene reducedMotion={reducedMotion} />
+        </Suspense>
+      )}
 
       <div className="hero__coords" aria-hidden="true">
         <span>
