@@ -7,9 +7,9 @@ interface GalleryProps {
 }
 
 const PHOTOS = [
-  '/media/ring-lifestyle.png',
-  '/media/ring-studio.png',
-  '/media/ring-linen.png',
+  '/media/ring-lifestyle.webp',
+  '/media/ring-studio.webp',
+  '/media/ring-linen.webp',
 ]
 
 /** Työn jälki: valmiit tilaustyöt braket-kehyksissä mono-otsikoin. */
@@ -28,7 +28,15 @@ export default function Gallery({ lang }: GalleryProps) {
         {PHOTOS.map((src, i) => (
           <figure key={src} className="hud-frame hud-frame--light" data-fade="up">
             <Corners />
-            <img className="hud-frame__media" src={src} alt={c.alts[i]} loading="lazy" />
+            <img
+              className="hud-frame__media"
+              src={src}
+              alt={c.alts[i]}
+              loading="lazy"
+              decoding="async"
+              width={1024}
+              height={1024}
+            />
             <figcaption className="hud-frame__caption">
               <span>{c.captions[i]}</span>
               <span>{String(i + 1).padStart(2, '0')} / 03</span>

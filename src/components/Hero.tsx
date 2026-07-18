@@ -1,9 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, lazy, useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import ToolpathScene from './ToolpathScene'
 import { Corners } from './icons'
 import type { Lang } from '../copy'
 import { copy } from '../copy'
+
+// three.js-nippu (~1 MB) ladataan asynkronisesti, jotta se ei viivästytä
+// ensimmäistä maalausta — hero toimii ilman sitäkin (canvas on koriste).
+const ToolpathScene = lazy(() => import('./ToolpathScene'))
 
 interface HeroProps {
   lang: Lang
@@ -52,7 +55,9 @@ export default function Hero({ lang, reducedMotion, onPrimary, onSecondary }: He
   return (
     <section ref={section} className="hero dotgrid">
       <Corners />
-      <ToolpathScene reducedMotion={reducedMotion} />
+      <Suspense fallback={null}>
+        <ToolpathScene reducedMotion={reducedMotion} />
+      </Suspense>
 
       <div className="hero__coords" aria-hidden="true">
         <span>

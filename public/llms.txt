@@ -1,0 +1,28 @@
+# Pohjapaja
+
+> CNC-verstas Helsingissä. Mittatilaustyönä koneistetut pienesineet: sormukset,
+> kyltit, lasinaluset, avaimenperät, nahka- ja akryylityöt sekä piirilevyt ja
+> prototyypit. Pohjatyöstä viimeistelyyn.
+
+Pohjapaja (Pohjakoodi tmi) on helsinkiläinen CNC-verstas. Työstämme messinkiä,
+alumiinia, kuparia, tammea, akryyliä ja nahkaa sekä jyrsimme piirilevyjä.
+Kone: Makera Z1 Pro · työstöalue 200 × 200 × 100 mm · toistotarkkuus 0,02 mm ·
+karan nopeus 18 000 rpm. Palvelemme suomeksi ja englanniksi koko Suomeen.
+
+Tarjouspyynnöt: myynti@pohjapaja.fi
+
+## Sivut
+
+- [Etusivu](https://pohjapaja.fi/): koko sivusto yhdellä sivulla — tuotteet,
+  prosessi, materiaalit, galleria ja yhteydenotto
+- [Mitä koneistamme](https://pohjapaja.fi/#tuotteet): sormukset, kyltit,
+  lasinaluset, avaimenperät, nahka & akryyli, piirilevyt & prototyypit
+- [Prosessi](https://pohjapaja.fi/#prosessi): tarjouspyynnöstä viimeistelyyn
+  neljässä vaiheessa
+- [Materiaalit](https://pohjapaja.fi/#materiaalit): materiaalit ja konetiedot
+- [Yhteys](https://pohjapaja.fi/#yhteys): tarjouspyyntölomake ja sähköposti
+
+## Muut resurssit
+
+- [Sivukartta](https://pohjapaja.fi/sitemap.xml)
+- [robots.txt](https://pohjapaja.fi/robots.txt)

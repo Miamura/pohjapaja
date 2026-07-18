@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Corners } from './icons'
@@ -22,6 +22,26 @@ export default function Process({ lang, reducedMotion }: ProcessProps) {
   const c = copy[lang].process
   const section = useRef<HTMLElement>(null)
   const path = useRef<SVGPolylineElement>(null)
+  const clips = useRef<HTMLDivElement>(null)
+  const [clipsNear, setClipsNear] = useState(false)
+
+  // Videot (yht. ~13 MB) ladataan vasta kun osio lähestyy näkymää,
+  // etteivät ne raskauta sivun ensilatausta.
+  useEffect(() => {
+    const el = clips.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setClipsNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   // Toolpath piirtyy scrollin mukana (stroke-dashoffset 1 -> 0)
   useEffect(() => {
@@ -103,13 +123,13 @@ export default function Process({ lang, reducedMotion }: ProcessProps) {
         ))}
       </ol>
 
-      <div className="process__clips">
+      <div ref={clips} className="process__clips">
         {CLIPS.map((src, i) => (
           <figure key={src} className="hud-frame" data-fade="up">
             <Corners />
             <video
               className="hud-frame__media"
-              src={src}
+              src={clipsNear ? src : undefined}
               autoPlay={!reducedMotion}
               muted
               loop

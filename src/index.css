@@ -6,7 +6,9 @@
   --grafiitti: #565049;
   --messinki: #b5821f;
   --messinki-light: #d6a94a;
-  --messinki-deep: #8a6212;
+  /* Tummennettu #8a6212:sta, jotta pieni teksti ylittää WCAG AA 4,5:1
+     myös kraft-taustalla (#eae3d5). */
+  --messinki-deep: #75530e;
   --alumiini: #8c9196;
 
   --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', sans-serif;
