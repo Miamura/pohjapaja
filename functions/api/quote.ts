@@ -10,7 +10,7 @@
 
 interface Env {
   QUOTE_BUCKET: R2Bucket
-  RESEND_API_KEY: string
+  RESEND_API_KEY?: string // valinnainen: jos puuttuu, tiedosto tallentuu silti R2:een
   QUOTE_TO: string // esim. myynti@pohjapaja.fi
   QUOTE_FROM: string // vahvistetusta domainista, esim. "Pohjapaja <no-reply@pohjapaja.fi>"
 }
@@ -123,20 +123,31 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
     const origin = new URL(request.url).origin
     const downloadUrl = `${origin}/api/file/${key}`
 
-    await sendEmail(env, {
-      name,
-      email,
-      material: String(form.get('material') ?? ''),
-      note: String(form.get('note') ?? ''),
-      dimensions: String(form.get('dimensions') ?? ''),
-      volume: String(form.get('volume_cm3') ?? ''),
-      triangles: String(form.get('triangles') ?? ''),
-      fileName: file.name,
-      sizeMb: (file.size / 1048576).toFixed(1),
-      downloadUrl,
-    })
+    // Sähposti-ilmoitus on best-effort: tiedosto on jo turvassa R2:ssa, joten
+    // ilmoituksen epäonnistuminen (tai puuttuva RESEND_API_KEY) ei kaada
+    // pyyntöä eikä näytä asiakkaalle virhettä.
+    let notified = false
+    if (env.RESEND_API_KEY) {
+      try {
+        await sendEmail(env, {
+          name,
+          email,
+          material: String(form.get('material') ?? ''),
+          note: String(form.get('note') ?? ''),
+          dimensions: String(form.get('dimensions') ?? ''),
+          volume: String(form.get('volume_cm3') ?? ''),
+          triangles: String(form.get('triangles') ?? ''),
+          fileName: file.name,
+          sizeMb: (file.size / 1048576).toFixed(1),
+          downloadUrl,
+        })
+        notified = true
+      } catch {
+        notified = false
+      }
+    }
 
-    return json({ ok: true })
+    return json({ ok: true, notified })
   } catch {
     return json({ error: 'server' }, 500)
   }
