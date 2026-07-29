@@ -92,6 +92,40 @@ interface Copy {
     lockup: string
     company: string
   }
+  makera: {
+    metaTitle: string
+    metaDescription: string
+    back: string
+    kicker: string
+    title: string
+    intro: string
+    privacy: string
+    drop: string
+    dropBtn: string
+    dropHint: string
+    loading: string
+    parseError: string
+    unsupported: string
+    dimsSize: string
+    dimsVolume: string
+    dimsTris: string
+    dimsUnitNote: string
+    reset: string
+    formTitle: string
+    nameLabel: string
+    emailLabel: string
+    materialLabel: string
+    noteLabel: string
+    notePlaceholder: string
+    submit: string
+    sending: string
+    needFile: string
+    sentTitle: string
+    sentBody: string
+    errorTitle: string
+    errorBody: string
+    materials: string[]
+  }
 }
 
 export const copy: Record<Lang, Copy> = {
@@ -246,6 +280,43 @@ export const copy: Record<Lang, Copy> = {
       lockup: 'CNC-verstas · Helsinki',
       company: 'Pohjakoodi (tmi) · © 2026 Pohjapaja',
     },
+    makera: {
+      metaTitle: 'Lataa 3D-malli · Pohjapaja CNC',
+      metaDescription:
+        'Vedä Fusion 360:sta viety STL- tai STEP-tiedosto selaimeen, näe malli heti 3D:nä ja pyydä tarjous. Tiedostosi ei lähde palvelimelle esikatselussa — kaikki tapahtuu selaimessasi.',
+      back: 'Etusivu',
+      kicker: '3D-esikatselu · Makera Z1 Pro',
+      title: 'Lataa mallisi, näe se heti.',
+      intro:
+        'Vedä Fusion 360:sta (tai muusta CAD-ohjelmasta) viety tiedosto tähän. Näet sen heti 3D:nä ja lähetät alkuperäisen tiedoston tarjousta varten — muutamme sitä matkalla nolla, jotta työstetty kappale vastaa täsmälleen malliasi.',
+      privacy:
+        'Esikatselu tapahtuu kokonaan selaimessasi — tiedostoa ei ladata mihinkään ennen kuin painat “Lähetä tarjouspyyntö”.',
+      drop: 'Vedä STL- tai STEP-tiedosto tähän',
+      dropBtn: 'tai valitse tiedosto',
+      dropHint: 'STL · STEP (.stp) · enintään 60 MB',
+      loading: 'Luetaan mallia…',
+      parseError: 'Tiedoston luku ei onnistunut. Tarkista että se on kelvollinen STL- tai STEP-tiedosto.',
+      unsupported: 'Tuetut muodot: STL ja STEP (.step/.stp).',
+      dimsSize: 'Mitat (X × Y × Z)',
+      dimsVolume: 'Tilavuus',
+      dimsTris: 'Kolmioita',
+      dimsUnitNote: 'Oletusyksikkö mm. Varmista mittakaava tarjouspyynnössä.',
+      reset: 'Vaihda tiedosto',
+      formTitle: 'Pyydä tarjous tästä mallista',
+      nameLabel: 'Nimi',
+      emailLabel: 'Sähköposti',
+      materialLabel: 'Toivottu materiaali',
+      noteLabel: 'Lisätiedot',
+      notePlaceholder: 'Kappalemäärä, viimeistely, aikataulu…',
+      submit: 'Lähetä tarjouspyyntö',
+      sending: 'Lähetetään…',
+      needFile: 'Lisää ensin malli.',
+      sentTitle: 'Kiitos — tiedosto on perillä!',
+      sentBody: 'Saimme mallisi ja yhteystietosi. Palaamme tarjouksella yleensä vuorokauden sisällä.',
+      errorTitle: 'Lähetys ei onnistunut',
+      errorBody: 'Yhteydessä oli häiriö. Yritä uudelleen tai lähetä tiedosto suoraan osoitteeseen',
+      materials: ['Ei väliä / ehdota', 'Messinki', 'Alumiini', 'Kupari', 'Tammi', 'Akryyli', 'Nahka'],
+    },
   },
   en: {
     nav: {
@@ -397,6 +468,43 @@ export const copy: Record<Lang, Copy> = {
     footer: {
       lockup: 'CNC workshop · Helsinki',
       company: 'Pohjakoodi (tmi) · © 2026 Pohjapaja',
+    },
+    makera: {
+      metaTitle: 'Upload a 3D model · Pohjapaja CNC',
+      metaDescription:
+        'Drag an STL or STEP file exported from Fusion 360 into the browser, see the model instantly in 3D and request a quote. Your file is not uploaded anywhere during preview — everything happens in your browser.',
+      back: 'Home',
+      kicker: '3D preview · Makera Z1 Pro',
+      title: 'Upload your model, see it instantly.',
+      intro:
+        'Drag a file exported from Fusion 360 (or any CAD program) here. See it right away in 3D and send the original file for a quote — we change nothing along the way, so the machined part matches your model exactly.',
+      privacy:
+        'The preview runs entirely in your browser — the file is not uploaded anywhere until you press “Send quote request”.',
+      drop: 'Drag an STL or STEP file here',
+      dropBtn: 'or choose a file',
+      dropHint: 'STL · STEP (.stp) · up to 60 MB',
+      loading: 'Reading model…',
+      parseError: 'Could not read the file. Check that it is a valid STL or STEP file.',
+      unsupported: 'Supported formats: STL and STEP (.step/.stp).',
+      dimsSize: 'Size (X × Y × Z)',
+      dimsVolume: 'Volume',
+      dimsTris: 'Triangles',
+      dimsUnitNote: 'Default unit mm. Confirm the scale in your request.',
+      reset: 'Change file',
+      formTitle: 'Request a quote for this model',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      materialLabel: 'Preferred material',
+      noteLabel: 'Details',
+      notePlaceholder: 'Quantity, finish, schedule…',
+      submit: 'Send quote request',
+      sending: 'Sending…',
+      needFile: 'Add a model first.',
+      sentTitle: 'Thanks — your file arrived!',
+      sentBody: 'We received your model and contact details. We usually reply with a quote within a day.',
+      errorTitle: 'Sending failed',
+      errorBody: 'There was a connection issue. Try again or send the file directly to',
+      materials: ["Doesn't matter / suggest", 'Brass', 'Aluminium', 'Copper', 'Oak', 'Acrylic', 'Leather'],
     },
   },
 }

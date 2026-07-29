@@ -1090,3 +1090,281 @@ video {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   /makera — lataa 3D-malli, esikatsele, pyydä tarjous
+   ============================================================ */
+
+.mk-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem var(--pad-x);
+  background: color-mix(in srgb, var(--luu) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--grafiitti) 18%, transparent);
+}
+.mk-nav__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--hiili);
+  text-decoration: none;
+}
+.mk-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.mk-nav__back {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--grafiitti);
+  text-decoration: none;
+}
+.mk-nav__back:hover { color: var(--messinki-deep); }
+
+.mk-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4.5rem) var(--pad-x) 4rem;
+}
+
+.mk-hero { max-width: 46rem; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.mk-hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--hiili);
+  margin: 0.7rem 0 1rem;
+}
+.mk-hero__intro {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--grafiitti);
+  max-width: 40rem;
+}
+.mk-hero__formats {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--messinki-deep);
+  margin-top: 0.8rem;
+}
+
+/* ---- Pudotusalue ---- */
+.mk-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: clamp(2.5rem, 7vw, 4.5rem) 1.5rem;
+  border: 2px dashed color-mix(in srgb, var(--grafiitti) 35%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--kraft) 45%, var(--luu));
+  transition: border-color 0.2s, background 0.2s;
+}
+.mk-drop.is-over {
+  border-color: var(--messinki);
+  background: color-mix(in srgb, var(--messinki) 8%, var(--luu));
+}
+.mk-drop--static { color: var(--grafiitti); }
+.mk-drop__icon { width: 46px; height: 46px; color: var(--messinki); }
+.mk-drop__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--hiili);
+}
+.mk-drop__btn { cursor: pointer; }
+.mk-drop__hint { font-family: var(--font-mono); font-size: 0.78rem; color: var(--grafiitti); }
+.mk-drop__privacy {
+  font-size: 0.82rem;
+  color: var(--grafiitti);
+  max-width: 30rem;
+  margin-top: 0.4rem;
+}
+
+/* ---- Työkalu: esikatselu + lomake ---- */
+.mk-tool {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .mk-tool { grid-template-columns: 1fr; }
+}
+
+.mk-viewer {
+  border: 1px solid color-mix(in srgb, var(--grafiitti) 20%, transparent);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--hiili);
+}
+.mk-viewer__stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(circle at 50% 40%, #2a2622 0%, var(--hiili) 70%);
+}
+.mk-viewer__stage canvas { display: block; width: 100% !important; height: 100% !important; }
+.mk-viewer__msg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--alumiini);
+}
+.mk-viewer__msg--error { color: #e0a86a; padding: 1.5rem; text-align: center; }
+.mk-viewer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid color-mix(in srgb, var(--alumiini) 20%, transparent);
+}
+.mk-viewer__file {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--luu);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mk-viewer__reset {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--messinki-light);
+  text-decoration: underline;
+}
+
+.mk-spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid color-mix(in srgb, var(--alumiini) 35%, transparent);
+  border-top-color: var(--messinki-light);
+  border-radius: 50%;
+  animation: mk-spin 0.8s linear infinite;
+}
+@keyframes mk-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .mk-spinner { animation-duration: 2s; } }
+
+.mk-dims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.8rem;
+  margin: 1rem 0.2rem 0;
+}
+.mk-dims div { display: flex; flex-direction: column; }
+.mk-dims dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--grafiitti);
+}
+.mk-dims dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--hiili);
+}
+.mk-dims__note {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+  color: var(--grafiitti);
+  margin-top: 0.3rem;
+}
+
+/* ---- Lomake ---- */
+.mk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  border: 1px solid color-mix(in srgb, var(--grafiitti) 18%, transparent);
+  border-radius: 14px;
+  background: var(--luu);
+}
+.mk-form__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--hiili);
+  margin-bottom: 0.2rem;
+}
+.mk-form select.field__input { appearance: none; cursor: pointer; }
+.mk-form__submit { margin-top: 0.3rem; }
+.mk-form__submit:disabled { opacity: 0.6; cursor: progress; }
+.mk-form__error { font-size: 0.85rem; color: #9a3a1a; }
+.mk-form__error a { color: inherit; }
+
+/* ---- Onnistumis-/tila-kortti ---- */
+.mk-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  padding: clamp(2.5rem, 7vw, 4rem) 1.5rem;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--messinki) 30%, transparent);
+  background: color-mix(in srgb, var(--messinki) 7%, var(--luu));
+}
+.mk-card__check {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--messinki);
+  color: var(--luu);
+  font-size: 1.6rem;
+}
+.mk-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--hiili);
+}
+.mk-card__body { color: var(--grafiitti); max-width: 32rem; }
+
+.mk-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem var(--pad-x);
+  border-top: 1px solid color-mix(in srgb, var(--grafiitti) 18%, transparent);
+}
+
+.cta-section__upload { margin-top: 1.1rem; }
+.cta-section__upload-link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--messinki-light);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--messinki-light) 45%, transparent);
+  padding-bottom: 2px;
+}
+.cta-section__upload-link:hover { color: var(--luu); border-color: var(--luu); }

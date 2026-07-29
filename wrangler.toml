@@ -1,0 +1,21 @@
+# Cloudflare Pages -konfiguraatio.
+# Staattinen sivusto (dist/) + Pages Functions (functions/): /api/quote & /api/file/*.
+#
+# Salaisuus RESEND_API_KEY asetetaan erikseen (EI tähän tiedostoon):
+#   npx wrangler pages secret put RESEND_API_KEY
+# tai Cloudflare-dashboard: Pages > projekti > Settings > Environment variables.
+
+name = "pohjapaja"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# R2-ämpäri johon asiakkaan alkuperäinen tiedosto tallennetaan muuttamattomana.
+# Luo ensin:  npx wrangler r2 bucket create pohjapaja-quotes
+[[r2_buckets]]
+binding = "QUOTE_BUCKET"
+bucket_name = "pohjapaja-quotes"
+
+[vars]
+QUOTE_TO = "myynti@pohjapaja.fi"
+# Lähettäjän on oltava Resendissä vahvistetusta domainista (pohjapaja.fi).
+QUOTE_FROM = "Pohjapaja <no-reply@pohjapaja.fi>"

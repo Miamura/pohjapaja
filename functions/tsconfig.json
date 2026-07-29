@@ -1,0 +1,14 @@
+{
+  "comment": "Vain editorin/tyyppitarkistuksen avuksi Pages Functionsille. EI osa pääbuildia (juuren tsconfig.json ei viittaa tähän), joten `npm run build` ei kosketa functions/-kansiota.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["."]
+}

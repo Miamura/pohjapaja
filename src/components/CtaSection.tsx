@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { CONTACT_EMAIL, copy, type Lang } from '../copy'
 import { PPMark } from './icons'
 
@@ -90,6 +91,13 @@ export default function CtaSection({ lang }: { lang: Lang }) {
         <div data-fade="up">
           <CtaForm lang={lang} />
         </div>
+        <p className="cta-section__upload" data-fade="up">
+          <Link to="/makera" className="cta-section__upload-link">
+            {lang === 'fi'
+              ? 'Onko sinulla jo 3D-malli? Lataa se ja näe se heti →'
+              : 'Already have a 3D model? Upload it and see it instantly →'}
+          </Link>
+        </p>
         <p className="cta-section__note">{c.note}</p>
       </div>
 

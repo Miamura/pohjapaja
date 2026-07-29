@@ -3,12 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Pohjapaja — CNC-verstas Helsingissä. Mittatilaustyönä koneistetut pienesineet: sormukset, kyltit, lasinaluset, avaimenperät ja prototyypit. Pohjatyöstä viimeistelyyn."
-    />
-    <title>Pohjapaja — CNC-verstas · Helsinki</title>
-    <link rel="canonical" href="https://pohjapaja.fi/" />
+    <!-- Sivukohtaiset otsikko, kuvaus ja canonical hallitaan reiteittain
+         Head-komponentilla (App.tsx / MakeraPage.tsx), jotta jokaisella
+         reitilla on tasmalleen yksi oikea otsikko - ei kaksoiskappaleita. -->
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%231A1815'/%3E%3Crect x='4.5' y='4.5' width='39' height='39' fill='none' stroke='%23B5821F' stroke-width='3'/%3E%3Ctext x='24' y='32' font-family='Arial, sans-serif' font-weight='700' font-size='19' letter-spacing='-1' fill='%23F4F1EA' text-anchor='middle'%3EPP%3C/text%3E%3C/svg%3E"
@@ -30,14 +27,9 @@
       />
     </noscript>
 
+    <!-- Vakio-OG (sama kaikilla sivuilla); otsikko/url/kuvaus reiteittain Headissa. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pohjapaja" />
-    <meta property="og:url" content="https://pohjapaja.fi/" />
-    <meta property="og:title" content="Pohjapaja — CNC-verstas · Helsinki" />
-    <meta
-      property="og:description"
-      content="Mittatilaustyönä koneistetut pienesineet: sormukset, kyltit, lasinaluset, avaimenperät ja prototyypit. Pohjatyöstä viimeistelyyn."
-    />
     <meta property="og:image" content="https://pohjapaja.fi/media/ring-studio.png" />
     <meta property="og:image:width" content="1024" />
     <meta property="og:image:height" content="1024" />

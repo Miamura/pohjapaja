@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Head } from 'vite-react-ssg'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -114,6 +115,20 @@ export default function App() {
 
   return (
     <>
+      <Head>
+        <title>Pohjapaja — CNC-verstas · Helsinki</title>
+        <meta
+          name="description"
+          content="Pohjapaja — CNC-verstas Helsingissä. Mittatilaustyönä koneistetut pienesineet: sormukset, kyltit, lasinaluset, avaimenperät ja prototyypit. Pohjatyöstä viimeistelyyn."
+        />
+        <link rel="canonical" href="https://pohjapaja.fi/" />
+        <meta property="og:url" content="https://pohjapaja.fi/" />
+        <meta property="og:title" content="Pohjapaja — CNC-verstas · Helsinki" />
+        <meta
+          property="og:description"
+          content="Mittatilaustyönä koneistetut pienesineet: sormukset, kyltit, lasinaluset, avaimenperät ja prototyypit. Pohjatyöstä viimeistelyyn."
+        />
+      </Head>
       <Cursor reducedMotion={reducedMotion} />
       <div className="progress" aria-hidden="true">
         <div ref={progressRef} className="progress__bar" />
